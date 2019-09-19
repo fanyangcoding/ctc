@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.siemens.ctc.dao.MediaMapper">
+
+    <resultMap id="mediaMap" type="com.siemens.ctc.model.Media">
+        <!--<id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>-->
+        <result column="media_name" property="mediaName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="file_size" property="fileSize" jdbcType="INTEGER" javaType="java.lang.Long"/>
+        <result column="path" property="path" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="category" property="category" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="authority" property="authority" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="owner" property="owner" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="download_num" property="downloadNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="view_num" property="viewNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="thumbnail_uri" property="thumbnailPath" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="pin" property="pin" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <resultMap id="folderMap" type="com.siemens.ctc.model.Folder">
+        <result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="category" property="category" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="folder_name" property="folderName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="last_update_time" property="lastUpdateTime" jdbcType="DATE" javaType="java.util.Date"/>
+    </resultMap>
+
+    <resultMap id="labelMap" type="com.siemens.ctc.model.Label">
+        <result column="labelName" property="labelName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="labelNum" property="labelNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <insert id="upload" parameterType="com.siemens.ctc.model.Media" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into sys_media (media_name,
+                               file_size,
+                               path,
+                               category,
+                               authority,
+                               create_time,
+                               download_num,
+                               view_num,
+                               owner,
+                               type,
+                               thumbnail_uri,
+                               pin)
+        values (#{mediaName},
+                #{fileSize},
+                #{path},
+                #{category},
+                #{authority},
+                #{createTime},
+                #{downloadNum},
+                #{viewNum},
+                #{owner},
+                #{type},
+                #{thumbnailPath},
+                #{pin})
+    </insert>
+
+    <insert id="uploadFolder" parameterType="com.siemens.ctc.model.Folder">
+        insert into sys_folder (category, folder_name, create_time, last_update_time)
+        values (#{category}, #{folderName}, #{createTime}, #{lastUpdateTime})
+    </insert>
+
+    <update id="updateFolder">
+        update sys_folder
+        set last_update_time = #{updateTime}
+        where sys_folder.id = #{folderId}
+    </update>
+
+    <select id="getFolderId" resultType="java.lang.Integer">
+        select sys_folder.id
+        from sys_folder
+        where category = #{category}
+          and folder_name = #{folderName}
+    </select>
+
+    <select id="getMediaById" resultMap="mediaMap">
+        select *
+        from sys_media
+        where id = #{mediaId}
+    </select>
+
+    <select id="getFolderById" resultMap="folderMap">
+        select *
+        from sys_folder
+        where id = #{folderId}
+    </select>
+
+    <delete id="deleteFolder">
+        delete
+        from sys_folder
+        where id = #{folderId}
+    </delete>
+
+    <!--<select id="findAllNoneRestrictMediaByDefault" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where authority = 'unrestricted'-->
+    <!--ORDER BY pin DESC, create_time DESC, view_num DESC-->
+    <!--</select>-->
+
+    <!--<select id="findNoneRestrictMediaByDefaultWithCategory" parameterType="String" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where authority = 'unrestricted'-->
+    <!--AND category like (#{category} || '%')-->
+    <!--ORDER BY pin DESC, create_time DESC, view_num DESC-->
+    <!--</select>-->
+
+    <!--<select id="findAllNoneRestrictMediaByOrder" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where authority = 'unrestricted'-->
+    <!--ORDER BY pin DESC, ${order} DESC-->
+    <!--</select>-->
+
+    <!--<select id="findNoneRestrictMediaByOrderWithCategory" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where authority = 'unrestricted'-->
+    <!--AND category like (#{category} || '%')-->
+    <!--order by pin DESC, ${order} DESC-->
+    <!--</select>-->
+
+    <!--<select id="findAllMediaByOrder" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--order by pin DESC, ${order} DESC-->
+    <!--</select>-->
+
+    <!--<select id="findAllMediaByOrderWithCategory" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where category like (#{category} || '%')-->
+    <!--order by pin DESC, ${order} DESC-->
+    <!--</select>-->
+
+    <!--<select id="findAllMediaByDefault" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--ORDER BY pin DESC, create_time DESC, view_num DESC-->
+    <!--</select>-->
+
+    <!--<select id="findAllMediaByDefaultWithCategory" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where category like (#{category} || '%')-->
+    <!--ORDER BY pin DESC, create_time DESC, view_num DESC-->
+    <!--</select>-->
+
+    <select id="getMedia" resultMap="mediaMap">
+        select *
+        from sys_media
+        where category like (#{category} || '%')
+          AND authority = #{authority}
+    </select>
+
+    <select id="getMediaByAuthority" resultMap="mediaMap">
+        select *
+        from sys_media
+        where authority = #{authority}
+    </select>
+
+    <select id="getMediaByCategory" resultMap="mediaMap">
+        select *
+        from sys_media
+        where category like (#{category} || '%')
+    </select>
+
+    <select id="getAllMedia" resultMap="mediaMap">
+        select *
+        from sys_media
+    </select>
+
+    <select id="getAllFolders" resultMap="folderMap">
+        select *
+        from sys_folder
+        ORDER BY #{order} DESC
+    </select>
+
+    <select id="getCertainFolders" resultMap="folderMap">
+        select *
+        from sys_folder
+        where category = #{category}
+    </select>
+
+
+    <select id="getByCategory" resultMap="mediaMap">
+        select *
+        from sys_media
+        where category = #{category}
+    </select>
+
+    <select id="getMediaWithPaginationByDefault" resultMap="mediaMap">
+        select * from sys_media a
+        where a.id in
+        <foreach item="mediaId" index="index" collection="mediaIds" open="(" separator="," close=")">
+            #{mediaId}
+        </foreach>
+        ORDER BY pin DESC, create_time DESC, view_num DESC
+    </select>
+
+    <select id="getMediaWithPaginationByOrder" resultMap="mediaMap">
+        select * from sys_media a
+        where a.id in
+        <foreach item="mediaId" index="index" collection="mediaIds" open="(" separator="," close=")">
+            #{mediaId}
+        </foreach>
+        ORDER BY pin DESC, ${order} DESC
+    </select>
+
+    <select id="getResourcesMediaListWithPagination" resultMap="mediaMap">
+        select * from sys_media a
+        where a.id in
+        <foreach item="mediaId" index="index" collection="mediaIds" open="(" separator="," close=")">
+            #{mediaId}
+        </foreach>
+    </select>
+
+    <!--<select id="getByTopCategory" resultMap="mediaMap">-->
+    <!--select *-->
+    <!--from sys_media-->
+    <!--where category like (#{topCategory} || '%')-->
+    <!--</select>-->
+
+    <select id="getMediaWithSameLabels" resultMap="mediaMap">
+
+        select * from sys_media b
+        where b.id in (select a.media_id from sys_labelmap a
+        where a.label_id in
+        <foreach item="labelId" index="index" collection="labelIds" open="(" separator="," close=")">
+            #{labelId}
+        </foreach>) and authority = #{authority}
+    </select>
+
+    <select id="getAllMediaWithSameLabels" resultMap="mediaMap">
+
+        select * from sys_media b
+        where b.id in (select a.media_id from sys_labelmap a
+        where a.label_id in
+        <foreach item="labelId" index="index" collection="labelIds" open="(" separator="," close=")">
+            #{labelId}
+        </foreach>)
+    </select>
+
+    <update id="plusViewNum">
+        update sys_media
+        set view_num = view_num + 1
+        where id = #{mediaId}
+    </update>
+
+    <update id="plusDownloadNum">
+        update sys_media
+        set download_num = download_num + 1
+        where id = #{medaiId}
+    </update>
+
+    <update id="rename">
+        update sys_media
+        set media_name = #{afterName}
+        where id = #{mediaId}
+    </update>
+
+    <delete id="delete">
+        delete
+        from sys_media
+        where id = #{mediaId}
+    </delete>
+
+    <select id="getPinNum" resultType="java.lang.Integer">
+        select count(*)
+        from sys_pin
+    </select>
+
+    <select id="getMediaNum" resultType="java.lang.Integer">
+        select count(*)
+        from sys_media
+    </select>
+
+    <update id="update">
+        update sys_media
+        set authority   = #{authority},
+            owner       = #{owner},
+            pin         = #{pin},
+            media_name  = #{mediaName},
+            create_time = #{createTime}
+        where id = #{mediaId}
+    </update>
+
+    <update id="updateMedia" parameterType="com.siemens.ctc.model.Media">
+        update sys_media
+        set media_name  = #{mediaName},
+            authority   = #{authority},
+            owner       = #{owner},
+            create_time = #{createTime}
+        where id = #{mediaId}
+    </update>
+
+    <select id="isPathExist" resultType="java.lang.Boolean">
+        select count(*)
+        from sys_media
+        where path = #{path}
+    </select>
+
+    <select id="isCategoryExist" resultType="java.lang.Integer">
+        select count(*)
+        from sys_media
+        where category = #{category}
+    </select>
+
+    <select id="isTopCategoryExist" resultType="java.lang.Integer">
+        select count(*)
+        from sys_media
+        where category like (#{topCategory} || '%')
+    </select>
+
+    <insert id="setPin">
+        insert into sys_pin (media_id, end_date)
+        values (#{mediaId}, #{endDate})
+    </insert>
+
+    <delete id="cancelPin">
+        delete
+        from sys_pin
+        where media_id = #{mediaId}
+    </delete>
+
+    <update id="updatePinDuration">
+        update sys_pin
+        set end_date = #{endDate}
+        where media_id = #{mediaId}
+    </update>
+
+    <select id="getMediaTypes" resultType="String">
+        select type
+        from sys_media
+        group by type;
+    </select>
+
+</mapper>

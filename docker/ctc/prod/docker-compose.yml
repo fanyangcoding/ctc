@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  ctc-api-mediaplay:
+    image: ctc-api-mediaplay:0.8.0-dev-20190902
+    volumes:
+    - /opt/ctc/media:/opt/ctc/media
+    ports:
+    - "8083:8083"
+    deploy:
+      restart_policy:
+        condition: on-failure

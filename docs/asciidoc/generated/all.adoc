@@ -1,0 +1,2530 @@
+= CTC REST API Interface 设计文档
+
+
+[[_overview]]
+== 概览
+CTC REST API Interface
+
+
+=== URI scheme
+[%hardbreaks]
+__域名__ : localhost:8082
+__基础路径__ : /
+
+
+=== 标签
+
+* AuthController : 认证授权操作API接口
+* FileMntController : 文件夹管理操作API接口
+* LabelController : 标签操作API接口
+* MediaController : 文件操作API接口
+* UserController : 用户操作API接口
+
+
+
+
+[[_paths]]
+== 资源
+
+[[_authcontroller_resource]]
+=== AuthController
+认证授权操作API接口
+
+
+[[_createauthenticationtokenusingpost]]
+==== 获取JWT token
+....
+POST /ctc/auth/login
+....
+
+
+===== 说明
+获取JWT token，默认有效期7日
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**password** +
+__可选__|密码|string
+|**Query**|**username** +
+__必填__|用户名|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_51c36a2f47e7d52f27a1182df0918388,ResultModel«object»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/auth/login
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_refreshandgetauthenticationtokenusingget]]
+==== 刷新JWT token
+....
+GET /ctc/auth/login
+....
+
+
+===== 说明
+刷新JWT token
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_51c36a2f47e7d52f27a1182df0918388,ResultModel«object»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/auth/login
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_filemntcontroller_resource]]
+=== FileMntController
+文件夹管理操作API接口
+
+
+[[_listfilesusingget]]
+==== 获取指定文件夹下的所有文件
+....
+GET /ctc/dir/category/getAll
+....
+
+
+===== 说明
+获取指定文件夹下的所有文件，category为文件夹名，pageSize设为0，不分页，返回所有结果
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**category** +
+__必填__|文件夹名|string
+|**Query**|**pageNum** +
+__必填__|页数|integer (int32)
+|**Query**|**pageSize** +
+__必填__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_bc89c665c78979db111ee67ef9acbce1,PageInfo«文件实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/dir/category/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "category" : "string",
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "authority" : "string",
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "fileSize" : 0,
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "pin" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_upload2dirusingpost]]
+==== 上传到指定文件夹
+....
+POST /ctc/dir/category/upload
+....
+
+
+===== 说明
+上传到指定文件夹
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**authority** +
+__必填__|安全等级|string
+|**Query**|**category** +
+__必填__|指定的文件夹名|string
+|**Query**|**labels** +
+__必填__|标签|string
+|**Query**|**owner** +
+__必填__|owner|string
+|**Body**|**file** +
+__必填__|批量上传的文件|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `multipart/form-data`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/dir/category/upload
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "authority" : "string",
+  "category" : "string",
+  "labels" : "string",
+  "owner" : "string"
+}
+----
+
+
+====== 请求 body
+[source,json]
+----
+{ }
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_listallfoldersusingget]]
+==== 获取所有文件夹
+....
+GET /ctc/dir/list
+....
+
+
+===== 说明
+获取所有文件夹
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|< string > array
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/dir/list
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+[ "string" ]
+----
+
+
+[[_labelcontroller_resource]]
+=== LabelController
+标签操作API接口
+
+
+[[_addlabelusingput]]
+==== 添加标签
+....
+PUT /ctc/label/add
+....
+
+
+===== 说明
+通过路径获取文件, 添加标签
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**labelName** +
+__必填__|添加的标签名|string
+|**Query**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/label/add
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "labelName" : "string",
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_deletelabelusingdelete]]
+==== 删除标签
+....
+DELETE /ctc/label/delete
+....
+
+
+===== 说明
+根据路径获取文件，删除标签
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**labelName** +
+__必填__|删除的标签名|string
+|**Query**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/label/delete
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "labelName" : "string",
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getlabelsusingget]]
+==== 获取标签
+....
+GET /ctc/label/get
+....
+
+
+===== 说明
+通过路径获取标签列表
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|< <<_f05e3d46c6d71ff744ac8951563449ca,标签实体类>> > array
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/label/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+[ {
+  "id" : "string",
+  "labelName" : "string",
+  "labelNum" : 0
+} ]
+----
+
+
+[[_getlabelnameandnumusingget]]
+==== 获取标签名和对应的标签数
+....
+GET /ctc/label/getNameAndNum
+....
+
+
+===== 说明
+获取标签名和对应的标签数
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|< string, integer (int32) > map
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/label/getNameAndNum
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+"object"
+----
+
+
+[[_labelsearchusingget]]
+==== 标签检索并分页
+....
+GET /ctc/label/labelSearch
+....
+
+
+===== 说明
+标签检索并分页,标签用逗号分隔
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**labels** +
+__必填__|标签|string
+|**Query**|**pageNum** +
+__必填__|页数|integer (int32)
+|**Query**|**pageSize** +
+__必填__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_bc89c665c78979db111ee67ef9acbce1,PageInfo«文件实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/label/labelSearch
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "labels" : "string",
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "authority" : "string",
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "fileSize" : 0,
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "pin" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_mediacontroller_resource]]
+=== MediaController
+文件操作API接口
+
+
+[[_deletemediausingdelete]]
+==== 删除文件
+....
+DELETE /ctc/media/delete
+....
+
+
+===== 说明
+根据路径删除文件
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Body**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/delete
+----
+
+
+====== 请求 body
+[source,json]
+----
+{ }
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_downloadusingget]]
+==== 断点下载
+....
+GET /ctc/media/download
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/download
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_editusingput]]
+==== 编辑文件
+....
+PUT /ctc/media/edit
+....
+
+
+===== 说明
+文件重命名，标注安全等级、owner，是否置顶，修改创建时间
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**authority** +
+__必填__|安全等级|string
+|**Query**|**createTime** +
+__必填__|创建时间|string
+|**Query**|**mediaName** +
+__必填__|文件名|string
+|**Query**|**owner** +
+__必填__|owner|string
+|**Query**|**path** +
+__必填__|原文件路径|string
+|**Query**|**pin** +
+__必填__|字符串，必须为：one week, two weeks, one month, unpin 中的一个|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/edit
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "authority" : "string",
+  "createTime" : "string",
+  "mediaName" : "string",
+  "owner" : "string",
+  "path" : "string",
+  "pin" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getmediabypathusingget]]
+==== 获取文件详情页
+....
+GET /ctc/media/get
+....
+
+
+===== 说明
+通过路径获取文件对象
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|文件路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_8f5874c4d2c3f4483644e0f8d188c11e,文件实体类>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "authority" : "string",
+  "category" : "string",
+  "createTime" : "string",
+  "downloadNum" : 0,
+  "fileSize" : 0,
+  "mediaName" : "string",
+  "owner" : "string",
+  "path" : "string",
+  "pin" : "string",
+  "thumbnailPath" : "string",
+  "type" : "string",
+  "viewNum" : 0
+}
+----
+
+
+[[_getallrestrictmediausingget]]
+==== 特权访客展示restrict内容分页
+....
+GET /ctc/media/getAllRestrict
+....
+
+
+===== 说明
+返回restrict内容, 如pageSize为0，不分页，返回全部结果
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**pageNum** +
+__可选__|页数|integer (int32)
+|**Query**|**pageSize** +
+__可选__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_bc89c665c78979db111ee67ef9acbce1,PageInfo«文件实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/getAllRestrict
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "authority" : "string",
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "fileSize" : 0,
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "pin" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_getmedianumusingget]]
+==== 获取文件总数
+....
+GET /ctc/media/getMediaNum
+....
+
+
+===== 说明
+获取文件总数
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_51c36a2f47e7d52f27a1182df0918388,ResultModel«object»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/getMediaNum
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_getnonerestrictmediausingget]]
+==== 普通访客展示non-restrict内容分页，默认排序最新最热
+....
+GET /ctc/media/getNoneRestrict
+....
+
+
+===== 说明
+返回所有非restrict文件, pageSize为0，不分页，返回全部结果；默认按照最新最热排序
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**pageNum** +
+__必填__|页数|integer (int32)
+|**Query**|**pageSize** +
+__必填__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_bc89c665c78979db111ee67ef9acbce1,PageInfo«文件实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/getNoneRestrict
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "authority" : "string",
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "fileSize" : 0,
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "pin" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_getnonerestrictmediawithorderusingget]]
+==== 普通访客展示non-restrict内容分页， 排序可选
+....
+GET /ctc/media/getNoneRestrictByOrder
+....
+
+
+===== 说明
+返回所有文件，pageSize为0， 不分页，返回所有结果; 最新排序order设为create_time, 最热排序order设为view_num
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**order** +
+__可选__|排序规则，最近或最热，order设为create_time或view_num|string
+|**Query**|**pageNum** +
+__必填__|页数|integer (int32)
+|**Query**|**pageSize** +
+__必填__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_bc89c665c78979db111ee67ef9acbce1,PageInfo«文件实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/getNoneRestrictByOrder
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "order" : "string",
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "authority" : "string",
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "fileSize" : 0,
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "pin" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_getprogressusingget]]
+==== 获取上传进度
+....
+GET /ctc/media/getProgress
+....
+
+
+===== 说明
+通过轮询获取保存在session中的进度
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|integer (int32)
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/getProgress
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+0
+----
+
+
+[[_showthumbnailusingget]]
+==== 获取缩略图
+....
+GET /ctc/media/showThumbnail/{thumbnailPath}
+....
+
+
+===== 说明
+获取缩略图
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Path**|**thumbnailPath** +
+__必填__|缩略图路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/showThumbnail/string
+----
+
+
+[[_updatethumbnailusingput]]
+==== 更换缩略图
+....
+PUT /ctc/media/thumbnail/update
+....
+
+
+===== 说明
+上传新缩略图
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|原文件路径|string
+|**FormData**|**file** +
+__必填__|file|file
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `multipart/form-data`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/thumbnail/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+====== 请求 formData
+[source,json]
+----
+"file"
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_uploadusingpost]]
+==== 文件批量上传
+....
+POST /ctc/media/upload
+....
+
+
+===== 说明
+文件批量上传, 创建文件夹，标签之间用逗号分隔
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**authority** +
+__必填__|安全等级|string
+|**Query**|**category** +
+__必填__|文件夹名|string
+|**Query**|**labels** +
+__必填__|标签|string
+|**Query**|**owner** +
+__必填__|owner|string
+|**Body**|**file** +
+__必填__|批量上传的文件|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_resultmodel,ResultModel>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `multipart/form-data`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/upload
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "authority" : "string",
+  "category" : "string",
+  "labels" : "string",
+  "owner" : "string"
+}
+----
+
+
+====== 请求 body
+[source,json]
+----
+{ }
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "object",
+  "msg" : "string"
+}
+----
+
+
+[[_usercontroller_resource]]
+=== UserController
+用户操作API接口
+
+
+[[_adduserusingpost]]
+==== 添加用户
+....
+POST /ctc/user/add
+....
+
+
+===== 说明
+添加用户
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**department** +
+__可选__|部门|string
+|**Query**|**email** +
+__必填__|邮箱|string
+|**Query**|**name** +
+__可选__|姓名|string
+|**Query**|**role** +
+__可选__|角色|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/add
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "department" : "string",
+  "email" : "string",
+  "name" : "string",
+  "role" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_deleteuserusingdelete]]
+==== 删除用户
+....
+DELETE /ctc/user/delete
+....
+
+
+===== 说明
+删除用户
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**email** +
+__必填__|邮箱|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/delete
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "email" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getuserusingget]]
+==== 查询用户
+....
+GET /ctc/user/get
+....
+
+
+===== 说明
+通过邮箱查询用户
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**email** +
+__必填__|邮箱|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_c2d667b8a3f2d3260c2fffc9b5454834,用户实体类>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "email" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "department" : "string",
+  "email" : "string",
+  "enabled" : true,
+  "id" : 0,
+  "name" : "string",
+  "password" : "string",
+  "role" : "string",
+  "username" : "string"
+}
+----
+
+
+[[_getallusersusingget]]
+==== 获取所有用户，并分页
+....
+GET /ctc/user/getAll
+....
+
+
+===== 说明
+根据参数分页
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**pageNum** +
+__可选__|页数|integer (int32)
+|**Query**|**pageSize** +
+__可选__|单页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_08b87b193de79229b364d26092a75037,PageInfo«用户实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/getAll
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "department" : "string",
+    "email" : "string",
+    "enabled" : true,
+    "id" : 0,
+    "name" : "string",
+    "password" : "string",
+    "role" : "string",
+    "username" : "string"
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_updateuserusingput]]
+==== 更新用户信息
+....
+PUT /ctc/user/update
+....
+
+
+===== 说明
+更新用户信息
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**department** +
+__可选__|部门|string
+|**Query**|**email** +
+__必填__|邮箱|string
+|**Query**|**name** +
+__可选__|姓名|string
+|**Query**|**newRole** +
+__必填__|新角色|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "department" : "string",
+  "email" : "string",
+  "name" : "string",
+  "newRole" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_updatepasswordusingput]]
+==== 修改用户登陆密码
+....
+PUT /ctc/user/updatePwd
+....
+
+
+===== 说明
+修改用户登陆密码
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**email** +
+__必填__|邮箱|string
+|**Query**|**newPassword** +
+__必填__|新密码|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/user/updatePwd
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "email" : "string",
+  "newPassword" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+
+
+[[_definitions]]
+== 定义
+
+[[_bc89c665c78979db111ee67ef9acbce1]]
+=== PageInfo«文件实体类»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**endRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**firstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**hasNextPage** +
+__可选__|**样例** : `true`|boolean
+|**hasPreviousPage** +
+__可选__|**样例** : `true`|boolean
+|**isFirstPage** +
+__可选__|**样例** : `true`|boolean
+|**isLastPage** +
+__可选__|**样例** : `true`|boolean
+|**lastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**list** +
+__可选__|**样例** : `[ "<<_8f5874c4d2c3f4483644e0f8d188c11e>>" ]`|< <<_8f5874c4d2c3f4483644e0f8d188c11e,文件实体类>> > array
+|**navigateFirstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigateLastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatePages** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatepageNums** +
+__可选__|**样例** : `[ 0 ]`|< integer (int32) > array
+|**nextPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageNum** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageSize** +
+__可选__|**样例** : `0`|integer (int32)
+|**pages** +
+__可选__|**样例** : `0`|integer (int32)
+|**prePage** +
+__可选__|**样例** : `0`|integer (int32)
+|**size** +
+__可选__|**样例** : `0`|integer (int32)
+|**startRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**total** +
+__可选__|**样例** : `0`|integer (int64)
+|===
+
+
+[[_08b87b193de79229b364d26092a75037]]
+=== PageInfo«用户实体类»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**endRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**firstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**hasNextPage** +
+__可选__|**样例** : `true`|boolean
+|**hasPreviousPage** +
+__可选__|**样例** : `true`|boolean
+|**isFirstPage** +
+__可选__|**样例** : `true`|boolean
+|**isLastPage** +
+__可选__|**样例** : `true`|boolean
+|**lastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**list** +
+__可选__|**样例** : `[ "<<_c2d667b8a3f2d3260c2fffc9b5454834>>" ]`|< <<_c2d667b8a3f2d3260c2fffc9b5454834,用户实体类>> > array
+|**navigateFirstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigateLastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatePages** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatepageNums** +
+__可选__|**样例** : `[ 0 ]`|< integer (int32) > array
+|**nextPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageNum** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageSize** +
+__可选__|**样例** : `0`|integer (int32)
+|**pages** +
+__可选__|**样例** : `0`|integer (int32)
+|**prePage** +
+__可选__|**样例** : `0`|integer (int32)
+|**size** +
+__可选__|**样例** : `0`|integer (int32)
+|**startRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**total** +
+__可选__|**样例** : `0`|integer (int64)
+|===
+
+
+[[_resultmodel]]
+=== ResultModel
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `"string"`|string
+|**data** +
+__可选__|**样例** : `"object"`|object
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_51c36a2f47e7d52f27a1182df0918388]]
+=== ResultModel«object»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `"string"`|string
+|**data** +
+__可选__|**样例** : `"object"`|object
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_5f0004be64abbe156f532ae433fab4d6]]
+=== ResultModel«string»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `"string"`|string
+|**data** +
+__可选__|**样例** : `"string"`|string
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_8f5874c4d2c3f4483644e0f8d188c11e]]
+=== 文件实体类
+文件实体对象
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**authority** +
+__必填__|安全等级 +
+**样例** : `"string"`|string
+|**category** +
+__必填__|文件夹名字 +
+**样例** : `"string"`|string
+|**createTime** +
+__必填__|创建时间 +
+**样例** : `"string"`|string (date-time)
+|**downloadNum** +
+__可选__|下载量 +
+**样例** : `0`|integer (int32)
+|**fileSize** +
+__必填__|文件大小 +
+**样例** : `0`|integer (int64)
+|**mediaName** +
+__必填__|文件名 +
+**样例** : `"string"`|string
+|**owner** +
+__必填__|owner +
+**样例** : `"string"`|string
+|**path** +
+__必填__|文件路径 +
+**样例** : `"string"`|string
+|**pin** +
+__必填__|是否置顶 +
+**样例** : `"string"`|string
+|**thumbnailPath** +
+__可选__|封面 +
+**样例** : `"string"`|string
+|**type** +
+__必填__|扩展名 +
+**样例** : `"string"`|string
+|**viewNum** +
+__可选__|浏览量 +
+**样例** : `0`|integer (int32)
+|===
+
+
+[[_f05e3d46c6d71ff744ac8951563449ca]]
+=== 标签实体类
+标签实体对象
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**id** +
+__必填__|标签id +
+**样例** : `"string"`|string
+|**labelName** +
+__必填__|标签名 +
+**样例** : `"string"`|string
+|**labelNum** +
+__可选__|标签数量 +
+**样例** : `0`|integer (int32)
+|===
+
+
+[[_c2d667b8a3f2d3260c2fffc9b5454834]]
+=== 用户实体类
+用户实体对象
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**department** +
+__可选__|department +
+**样例** : `"string"`|string
+|**email** +
+__必填__|email +
+**样例** : `"string"`|string
+|**enabled** +
+__可选__|**样例** : `true`|boolean
+|**id** +
+__可选__|id +
+**样例** : `0`|integer (int32)
+|**name** +
+__必填__|name +
+**样例** : `"string"`|string
+|**password** +
+__可选__|password +
+**样例** : `"string"`|string
+|**role** +
+__必填__|role +
+**样例** : `"string"`|string
+|**username** +
+__可选__|username +
+**样例** : `"string"`|string
+|===
+
+
+
+
+

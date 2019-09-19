@@ -1,0 +1,116 @@
+
+[[_definitions]]
+== 定义
+
+[[_a5bb089cae440b83f4038b7cc131240d]]
+=== PageInfo«媒体实体类»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**endRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**firstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**hasNextPage** +
+__可选__|**样例** : `true`|boolean
+|**hasPreviousPage** +
+__可选__|**样例** : `true`|boolean
+|**isFirstPage** +
+__可选__|**样例** : `true`|boolean
+|**isLastPage** +
+__可选__|**样例** : `true`|boolean
+|**lastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**list** +
+__可选__|**样例** : `[ "<<_cf54fa6458ec523f408b87237e6378e1>>" ]`|< <<_cf54fa6458ec523f408b87237e6378e1,媒体实体类>> > array
+|**navigateFirstPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigateLastPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatePages** +
+__可选__|**样例** : `0`|integer (int32)
+|**navigatepageNums** +
+__可选__|**样例** : `[ 0 ]`|< integer (int32) > array
+|**nextPage** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageNum** +
+__可选__|**样例** : `0`|integer (int32)
+|**pageSize** +
+__可选__|**样例** : `0`|integer (int32)
+|**pages** +
+__可选__|**样例** : `0`|integer (int32)
+|**prePage** +
+__可选__|**样例** : `0`|integer (int32)
+|**size** +
+__可选__|**样例** : `0`|integer (int32)
+|**startRow** +
+__可选__|**样例** : `0`|integer (int32)
+|**total** +
+__可选__|**样例** : `0`|integer (int64)
+|===
+
+
+[[_5f0004be64abbe156f532ae433fab4d6]]
+=== ResultModel«string»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**code** +
+__可选__|**样例** : `"string"`|string
+|**data** +
+__可选__|**样例** : `"string"`|string
+|**msg** +
+__可选__|**样例** : `"string"`|string
+|===
+
+
+[[_cf54fa6458ec523f408b87237e6378e1]]
+=== 媒体实体类
+媒体实体对象
+
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|名称|说明|类型
+|**category** +
+__必填__|文件夹 +
+**样例** : `"string"`|string
+|**createTime** +
+__必填__|创建时间 +
+**样例** : `"string"`|string
+|**downloadNum** +
+__可选__|下载量 +
+**样例** : `0`|integer (int32)
+|**ext** +
+__必填__|扩展名 +
+**样例** : `"string"`|string
+|**fileSize** +
+__必填__|文件大小 +
+**样例** : `0`|integer (int64)
+|**labels** +
+__可选__|标签 +
+**样例** : `"string"`|string
+|**mediaName** +
+__必填__|媒体名 +
+**样例** : `"string"`|string
+|**owner** +
+__必填__|拥有者 +
+**样例** : `"string"`|string
+|**path** +
+__必填__|媒体路径 +
+**样例** : `"string"`|string
+|**thumbnailPath** +
+__可选__|缩略图路径 +
+**样例** : `"string"`|string
+|**type** +
+__必填__|保密级别 +
+**样例** : `"string"`|string
+|**viewNum** +
+__可选__|点击量 +
+**样例** : `0`|integer (int32)
+|===
+
+
+

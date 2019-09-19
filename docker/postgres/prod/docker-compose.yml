@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  ctc-postgres:
+#    image: postgres:9.4
+    image: 10.192.30.110:8280/postgres:9.4
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/posrgresql/data/pgdata
+    ports:
+    - 5432:5432
+    deploy:
+      restart_policy:
+        condition: on-failure

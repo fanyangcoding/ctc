@@ -1,0 +1,24 @@
+= CTC REST API Interface 设计文档
+
+
+[[_overview]]
+== 概览
+CTC API Interface
+
+
+=== URI scheme
+[%hardbreaks]
+__域名__ : localhost:8082
+__基础路径__ : /
+
+
+=== 标签
+
+* LabelController : 标签操作API接口
+* MediaController : 媒体操作API接口
+* directory-controller : Directory Controller
+* file-mgm-controller : File Mgm Controller
+* show-controller : Show Controller
+
+
+

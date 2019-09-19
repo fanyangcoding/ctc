@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.siemens.ctc.dao.LabelMapper">
+    <resultMap id="labelMap" type="com.siemens.ctc.model.Label">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="label_name" property="labelName" jdbcType="VARCHAR"/>
+        <result column="label_num" property="labelNum" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="labelNameAndNum" type="com.siemens.ctc.model.Label">
+        <result column="labelName" property="labelName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="labelNum" property="labelNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <resultMap id="labelSearchResultMap" type="com.siemens.ctc.model.Media">
+    <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    <result column="media_name" property="mediaName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="file_size" property="fileSize" jdbcType="INTEGER" javaType="java.lang.Long"/>
+    <result column="path" property="path" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="category" property="category" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="authority" property="authority" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="create_time" property="createTime" jdbcType="DATE" javaType="java.util.Date"/>
+    <result column="owner" property="owner" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="download_num" property="downloadNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    <result column="view_num" property="viewNum" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+    <!--<result column="labels" property="labels" jdbcType="VARCHAR" javaType="java.lang.String"/>-->
+    <result column="type" property="type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="thumbnail_uri" property="thumbnailPath" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    <result column="pin" property="pin" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="isLabelExist" parameterType="String" resultType="java.lang.Boolean">
+        select count(*)
+        from sys_label
+        where label_name = #{labelName}
+    </select>
+
+    <insert id="addLabel" parameterType="String">
+        insert into sys_label (label_name, label_num)
+        values (#{labelName}, 1)
+
+    </insert>
+
+    <update id="plusLabelNum" parameterType="String">
+        update sys_label
+        set label_num = label_num + 1
+        where label_name = #{labelName}
+    </update>
+
+    <update id="minusLabelNum" parameterType="String">
+        update sys_label
+        set label_num = label_num - 1
+        where label_name = #{labelName}
+    </update>
+
+    <!--<update id="addLabels">-->
+    <!--update sys_media-->
+    <!--set labels = concat(#{labelName}, ',', labels)-->
+    <!--where id = #{mediaId}-->
+    <!--</update>-->
+
+    <!--<update id="deleteLabel">-->
+    <!--update sys_media-->
+    <!--set labels = replace(labels, concat(#{labelName}, ','), '')-->
+    <!--where path = #{path}-->
+    <!--</update>-->
+
+    <select id="getLabels" resultMap="labelMap">
+        select *
+        from sys_label
+        where sys_label.id in
+              (select sys_labelmap.label_id from sys_labelmap where sys_labelmap.media_id = #{mediaId})
+    </select>
+
+    <select id="getLabelNameAndNum" resultMap="labelNameAndNum">
+        select id as id, label_name as labelName, label_num as labelNum
+        from sys_label
+    </select>
+
+    <!--<insert id="addLabelMap">-->
+        <!--insert into sys_labelmap (media_id, label_id)-->
+                <!--(select a.id, b.id-->
+                 <!--from sys_media a,-->
+                      <!--sys_label b-->
+                 <!--where a.path = #{path}-->
+                   <!--and b.label_name = #{labelName})-->
+    <!--</insert>-->
+
+    <insert id="addLabelMap">
+        insert into sys_labelmap (media_id, label_id)
+        values (#{mediaId}, (select b.id from sys_label b where b.label_name = #{labelName}))
+    </insert>
+
+    <!--<delete id="deleteLabelMap">-->
+    <!--delete-->
+    <!--from sys_labelmap a-->
+    <!--where a.media_id = (select sys_media.id from sys_media where path = #{path})-->
+    <!--and a.label_id = (select sys_label.id from sys_label where label_name = #{labelName})-->
+    <!--</delete>-->
+
+    <delete id="deleteLabelMap">
+        delete
+        from sys_labelmap a
+        where a.media_id = #{mediaId}
+          and a.label_id = (select sys_label.id from sys_label where label_name = #{labelName})
+    </delete>
+
+    <select id="labelSearch" resultMap="labelSearchResultMap">
+        select *
+        from sys_media
+        where sys_media.id in
+              (select sys_labelmap.media_id
+               from sys_labelmap
+               where label_id = (select sys_label.id from sys_label where label_name = #{labelName}))
+    </select>
+
+    <select id="getLabelNum" resultType="java.lang.Integer">
+        select label_num
+        from sys_label
+        where label_name = #{labelName}
+    </select>
+
+    <delete id="removeLabel">
+        delete
+        from sys_label
+        where label_name = #{labelName}
+    </delete>
+
+</mapper>

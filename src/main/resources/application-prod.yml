@@ -1,0 +1,60 @@
+server:
+  port: 8083
+
+  tomcat:
+    max-http-post-size: -1
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 3000MB
+      max-request-size: 10000MB
+
+    # 配置session实时生效
+  session:
+    store-type: redis
+    redis:
+      flush-mode: immediate
+
+  datasource:
+    url: jdbc:postgresql://10.192.29.18:5432/ctc
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+#
+mybatis:
+  mapper-locations: classpath:mybatis/mappers/*.xml
+  type-aliases-package: com.siemens.ctc.model
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  config-location: classpath:mybatis/mybatis-config.xml
+
+pagehelper:
+  helpDialect: postgresql
+  reasonable: true
+  supportMethodArguments: true
+  parms: count=countSql
+
+custom:
+  uploadBasePath: /opt/ctc/media/upload/
+  thumbnailBasePath: /opt/ctc/media/thumbnail/
+  maxPinNum: 3
+
+jwt.header: Authorization
+jwt.secret: mySecret
+jwt.expiration: 604800
+jwt.tokenHeader: Bearer
+jwt.route.authentication.path: ctc/auth/login
+jwt.route.authentication.refresh: ctc/auth/refresh
+jwt.route.authentication.register: "auth/register"
+
+multipart.maxFileSize: 3000MB
+multipart.maxRequestSize: 10000MB
+

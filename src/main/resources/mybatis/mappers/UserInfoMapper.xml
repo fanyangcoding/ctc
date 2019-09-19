@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.siemens.ctc.dao.UserInfoMapper">
+
+    <resultMap id="baseResultMap" type="com.siemens.ctc.model.UserInfo">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="username" property="username" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="password" property="password" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="email" property="email" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="role" property="role" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="department" property="department" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <result column="lastPasswordResetDate" property="lastPasswordResetDate" jdbcType="TIMESTAMP"
+                javaType="java.util.Date"/>
+    </resultMap>
+    <select id="findByUsername" resultType="com.siemens.ctc.model.UserInfo">
+        select user_info.id,
+               user_info.username,
+               user_info.password,
+               user_info.email,
+               user_info.role,
+               user_info.department,
+               user_info.name
+        from user_info
+        where username = #{username}
+    </select>
+
+    <select id="findByEmail" resultType="com.siemens.ctc.model.UserInfo">
+        select user_info.id,
+               user_info.username,
+               user_info.password,
+               user_info.email,
+               user_info.role,
+               user_info.department,
+               user_info.name
+        from user_info
+        where email = #{email}
+    </select>
+
+    <select id="findByUserId" resultType="com.siemens.ctc.model.UserInfo">
+        select user_info.id,
+               user_info.username,
+               user_info.password,
+               user_info.email,
+               user_info.role,
+               user_info.department,
+               user_info.name
+        from user_info
+        where user_info.id = #{userId}
+    </select>
+
+    <select id="findAllUsers" resultMap="baseResultMap">
+        select *
+        from user_info
+    </select>
+
+    <select id="findUserByRole" resultMap="baseResultMap">
+        select *
+        from user_info
+        where role = #{role}
+    </select>
+
+    <insert id="addUser" parameterType="com.siemens.ctc.model.UserInfo">
+        insert into user_info (username, password, email, role, department, name)
+        values (#{username}, #{password}, #{email}, #{role}, #{department}, #{name})
+    </insert>
+
+    <delete id="deleteUser">
+        delete
+        from user_info
+        where email = #{email}
+    </delete>
+
+    <update id="updatePassword">
+        update user_info
+        set password                = #{newPassword},
+            "lastPasswordResetDate" = (select current_date)
+        where email = #{email}
+    </update>
+
+    <update id="update">
+        update user_info
+        set role       = #{newRole},
+            name       = #{name},
+            department = #{department}
+        where email = #{email}
+    </update>
+
+    <select id="isEmailExist" resultType="java.lang.Boolean">
+        select count(*)
+        from user_info
+        where email = #{email}
+    </select>
+
+    <update id="updateUser" parameterType="com.siemens.ctc.model.UserInfo">
+        update user_info
+        set department = #{department},
+            name       = #{name},
+            role       = #{role}
+        where id = #{id}
+    </update>
+
+</mapper>

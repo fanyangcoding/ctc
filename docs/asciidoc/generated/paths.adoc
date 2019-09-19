@@ -1,0 +1,1757 @@
+
+[[_paths]]
+== 资源
+
+[[_labelcontroller_resource]]
+=== LabelController
+标签操作API接口
+
+
+[[_addlabelusingput]]
+==== 给媒体添加标签
+....
+PUT /ctc/media/label/add
+....
+
+
+===== 说明
+根据路径获取媒体,添加标签
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**labelName** +
+__必填__|添加的标签名|string
+|**Query**|**path** +
+__必填__|媒体路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/label/add
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "labelName" : "string",
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_deletelabelusingdelete]]
+==== 删除媒体标签
+....
+DELETE /ctc/media/label/delete
+....
+
+
+===== 说明
+根据路径获取媒体，删除标签
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**labelName** +
+__必填__|删除的标签名|string
+|**Query**|**path** +
+__必填__|媒体路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/label/delete
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "labelName" : "string",
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getlabelusingget]]
+==== 获取媒体标签
+....
+GET /ctc/media/label/get
+....
+
+
+===== 说明
+根据路径获取标签
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|媒体路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|string
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/label/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+"string"
+----
+
+
+[[_mediacontroller_resource]]
+=== MediaController
+媒体操作API接口
+
+
+[[_downloadusingget]]
+==== 断点下载
+....
+GET /ctc/media/download
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|媒体路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/download
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_getmediabypathusingget]]
+==== 获取媒体
+....
+GET /ctc/media/get
+....
+
+
+===== 说明
+根据路径获取媒体对象
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|媒体路径|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_cf54fa6458ec523f408b87237e6378e1,媒体实体类>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "category" : "string",
+  "createTime" : "string",
+  "downloadNum" : 0,
+  "ext" : "string",
+  "fileSize" : 0,
+  "labels" : "string",
+  "mediaName" : "string",
+  "owner" : "string",
+  "path" : "string",
+  "thumbnailPath" : "string",
+  "type" : "string",
+  "viewNum" : 0
+}
+----
+
+
+[[_paginationusingget]]
+==== 分页
+....
+GET /ctc/media/pagination
+....
+
+
+===== 说明
+根据参数分页
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**pageNum** +
+__可选__|页数|integer (int32)
+|**Query**|**pageSize** +
+__可选__|每页数量|integer (int32)
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_a5bb089cae440b83f4038b7cc131240d,PageInfo«媒体实体类»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/pagination
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "pageNum" : 0,
+  "pageSize" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "endRow" : 0,
+  "firstPage" : 0,
+  "hasNextPage" : true,
+  "hasPreviousPage" : true,
+  "isFirstPage" : true,
+  "isLastPage" : true,
+  "lastPage" : 0,
+  "list" : [ {
+    "category" : "string",
+    "createTime" : "string",
+    "downloadNum" : 0,
+    "ext" : "string",
+    "fileSize" : 0,
+    "labels" : "string",
+    "mediaName" : "string",
+    "owner" : "string",
+    "path" : "string",
+    "thumbnailPath" : "string",
+    "type" : "string",
+    "viewNum" : 0
+  } ],
+  "navigateFirstPage" : 0,
+  "navigateLastPage" : 0,
+  "navigatePages" : 0,
+  "navigatepageNums" : [ 0 ],
+  "nextPage" : 0,
+  "pageNum" : 0,
+  "pageSize" : 0,
+  "pages" : 0,
+  "prePage" : 0,
+  "size" : 0,
+  "startRow" : 0,
+  "total" : 0
+}
+----
+
+
+[[_uploadusingpost]]
+==== 媒体批量上传
+....
+POST /ctc/media/upload
+....
+
+
+===== 说明
+批量上传
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**file** +
+__必填__|file|< file > array(multi)
+|**Body**|**media** +
+__可选__|媒体实体对象|<<_cf54fa6458ec523f408b87237e6378e1,媒体实体类>>
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `application/json`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/upload
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "file" : "file"
+}
+----
+
+
+====== 请求 body
+[source,json]
+----
+{
+  "category" : "string",
+  "createTime" : "string",
+  "downloadNum" : 0,
+  "ext" : "string",
+  "fileSize" : 0,
+  "labels" : "string",
+  "mediaName" : "string",
+  "owner" : "string",
+  "path" : "string",
+  "thumbnailPath" : "string",
+  "type" : "string",
+  "viewNum" : 0
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_directory-controller_resource]]
+=== Directory-controller
+Directory Controller
+
+
+[[_listdirectoriesusingget]]
+==== listDirectories
+....
+GET /ctc/directory/list
+....
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|< string > array
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/directory/list
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+[ "string" ]
+----
+
+
+[[_file-mgm-controller_resource]]
+=== File-mgm-controller
+File Mgm Controller
+
+
+[[_deletemediausingdelete]]
+==== deleteMedia
+....
+DELETE /ctc/media/delete
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/delete
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_getownerusingget]]
+==== getOwner
+....
+GET /ctc/media/owner/get
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/owner/get
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_updateownerusingpost]]
+==== updateOwner
+....
+POST /ctc/media/owner/update
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**owner** +
+__必填__|owner|string
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|<<_5f0004be64abbe156f532ae433fab4d6,ResultModel«string»>>
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/owner/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "owner" : "string",
+  "path" : "string"
+}
+----
+
+
+===== HTTP响应示例
+
+====== 响应 200
+[source,json]
+----
+{
+  "code" : "string",
+  "data" : "string",
+  "msg" : "string"
+}
+----
+
+
+[[_renamemediausingpost]]
+==== renameMedia
+....
+POST /ctc/media/rename
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**afterName** +
+__必填__|afterName|string
+|**Query**|**originalPath** +
+__必填__|originalPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/rename
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "afterName" : "string",
+  "originalPath" : "string"
+}
+----
+
+
+[[_updatetypeusingpost]]
+==== updateType
+....
+POST /ctc/media/type/update
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|**Query**|**type** +
+__必填__|type|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/type/update
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string",
+  "type" : "string"
+}
+----
+
+
+[[_show-controller_resource]]
+=== Show-controller
+Show Controller
+
+
+[[_showthumbnailusingpost]]
+==== showThumbnail
+....
+POST /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusingget]]
+==== showThumbnail
+....
+GET /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusingput]]
+==== showThumbnail
+....
+PUT /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusingdelete]]
+==== showThumbnail
+....
+DELETE /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusingpatch]]
+==== showThumbnail
+....
+PATCH /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusinghead]]
+==== showThumbnail
+....
+HEAD /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showthumbnailusingoptions]]
+==== showThumbnail
+....
+OPTIONS /ctc/media/show/thumbnail
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**thumbnailPath** +
+__必填__|thumbnailPath|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/thumbnail
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "thumbnailPath" : "string"
+}
+----
+
+
+[[_showvideousingpost]]
+==== showVideo
+....
+POST /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousingget]]
+==== showVideo
+....
+GET /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousingput]]
+==== showVideo
+....
+PUT /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**201**|Created|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|**404**|Not Found|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousingdelete]]
+==== showVideo
+....
+DELETE /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousingpatch]]
+==== showVideo
+....
+PATCH /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousinghead]]
+==== showVideo
+....
+HEAD /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+[[_showvideousingoptions]]
+==== showVideo
+....
+OPTIONS /ctc/media/show/video
+....
+
+
+===== 参数
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|类型|名称|说明|类型
+|**Query**|**path** +
+__必填__|path|string
+|===
+
+
+===== 响应
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP代码|说明|类型
+|**200**|OK|无内容
+|**204**|No Content|无内容
+|**401**|Unauthorized|无内容
+|**403**|Forbidden|无内容
+|===
+
+
+===== 消耗
+
+* `application/json`
+
+
+===== 生成
+
+* `*/*`
+
+
+===== HTTP请求示例
+
+====== 请求 path
+----
+/ctc/media/show/video
+----
+
+
+====== 请求 query
+[source,json]
+----
+{
+  "path" : "string"
+}
+----
+
+
+

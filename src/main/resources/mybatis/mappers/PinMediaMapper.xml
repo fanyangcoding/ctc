@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.siemens.ctc.dao.PinMediaMapper">
+
+    <resultMap id="pinMediaMap" type="com.siemens.ctc.model.PinMedia">
+        <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="media_id" property="mediaId" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        <result column="end_date" property="endDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    </resultMap>
+
+    <select id="getPinMedia" resultMap="pinMediaMap">
+        select *
+        from sys_pin
+    </select>
+
+    <update id="unsetPin">
+        update sys_media
+        set pin = 'unpin'
+    </update>
+
+</mapper>
