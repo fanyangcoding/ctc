@@ -380,18 +380,18 @@ public class MediaUtil {
 
     public List<Media> getResourcesMediaList(List<Label> labels, String category, String authority) {
 
-        List<Media> mediaListWithSameLabel = mediaService.getMediaWithSameLabels(labels, authority);
-        List<Media> mediaListWithSameCategory = mediaService.getMedia(category, authority);
-        mediaListWithSameLabel.addAll(mediaListWithSameCategory);
-        return mediaListWithSameLabel;
+        List<Media> mediaListWithSameLabels = mediaService.getMediaWithSameLabels(labels, authority); // 获取符合标签搜索的全部同安全等级文件
+        List<Media> mediaListWithSameCategory = mediaService.getMedia(category, authority);  // 获取同级目录下符合目录搜索的全部同安全等级文件
+        mediaListWithSameLabels.addAll(mediaListWithSameCategory);
+        return mediaListWithSameLabels;
     }
 
     public List<Media> getResourcesMediaList(List<Label> labels, String category) {
 
-        List<Media> mediaListWithSameLabel = mediaService.getAllMediaWithSameLabels(labels);
+        List<Media> mediaListWithSameLabels = mediaService.getAllMediaWithSameLabels(labels);
         List<Media> mediaListWithSameCategory = mediaService.getMediaByCategory(category);
-        mediaListWithSameLabel.addAll(mediaListWithSameCategory);
-        return mediaListWithSameLabel;
+        mediaListWithSameLabels.addAll(mediaListWithSameCategory);
+        return mediaListWithSameLabels;
     }
 
 
@@ -475,5 +475,28 @@ public class MediaUtil {
     public List<Media> removeMedia(List<Media> mediaList, Media media) {
         mediaList.removeIf(itselfMedia -> itselfMedia.getId().equals(media.getId()));
         return mediaList;
+    }
+
+    // 自定义一个有序且不重复的集合
+    public class SetList<T> extends LinkedList<T> {
+        @Override
+        public boolean add(T object) {
+            if (size() == 0) {
+                return super.add(object);
+            } else {
+                int count = 0;
+                for (T t : this) {
+                    if (t.equals(object)) {
+                        count++;
+                        break;
+                    }
+                }
+                if (count == 0) {
+                    return super.add(object);
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 }

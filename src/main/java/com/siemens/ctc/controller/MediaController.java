@@ -725,6 +725,7 @@ public class MediaController extends BaseController {
             resourcesMediaList = mediaUtil.getResourcesMediaList(labelList, category, "unrestricted");
             resourcesMediaList = mediaUtil.removeMedia(resourcesMediaList, media);
 
+
             // 分页
             PageInfo<Media> mediaPage = mediaUtil.getResourcesMediaListWithPagination(pageNum, pageSize, resourcesMediaList);
             return new ResultModel<>(ResultStatus.SUCCESS, mediaPage);
