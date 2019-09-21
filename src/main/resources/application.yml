@@ -1,7 +1,4 @@
 spring:
   profiles:
-    active: test
+    active: @spring.profiles.active@
 
-server:
-  tomcat:
-    max-http-post-size: -1
